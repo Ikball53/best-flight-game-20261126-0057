@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaimana Air Mail — Golden Hour Mail Run</title>
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.min.js"
+  }
+}
+</script>
+</head>
+<body>
+<div id="game-root"></div>
+
+<!-- Flight instruments: altitude, speed, heading, fuel, score, timer -->
+<div id="hud" class="hidden">
+  <div id="hud-left">
+    <div class="gauge"><span class="gauge-label">SPD</span><span id="hud-speed" class="gauge-value">0</span><span class="gauge-unit">KT</span></div>
+    <div class="gauge"><span class="gauge-label">ALT</span><span id="hud-alt" class="gauge-value">0</span><span class="gauge-unit">FT</span></div>
+    <div class="gauge"><span class="gauge-label">HDG</span><span id="hud-heading" class="gauge-value">000</span><span class="gauge-unit">&deg;</span></div>
+    <div class="gauge"><span class="gauge-label">V/S</span><span id="hud-vs" class="gauge-value">0</span><span class="gauge-unit">FPM</span></div>
+  </div>
+  <div id="hud-right">
+    <div class="gauge"><span class="gauge-label">FUEL</span><div id="fuel-bar"><div id="fuel-fill"></div></div><span id="hud-fuel" class="gauge-value">100%</span></div>
+    <div class="gauge"><span class="gauge-label">SCORE</span><span id="hud-score" class="gauge-value">0</span></div>
+    <div class="gauge"><span class="gauge-label">TIME</span><span id="hud-timer" class="gauge-value">0:00</span></div>
+    <div class="gauge"><span class="gauge-label">MAIL</span><span id="hud-rings" class="gauge-value">0/8</span></div>
+  </div>
+  <div id="hud-center">
+    <canvas id="horizon" width="132" height="132"></canvas>
+    <div id="compass"><div id="compass-strip"></div><div id="compass-needle"></div></div>
+    <div id="hud-wind">WIND <span id="hud-wind-value">CALM</span></div>
+    <div id="hud-next">NEXT RING <span id="hud-next-dist">—</span></div>
+  </div>
+  <div id="hud-message"></div>
+  <div id="hud-throttle"><div id="throttle-fill"></div><span>THR</span></div>
+  <div id="hud-hint">W/S throttle &middot; ARROWS pitch &amp; roll &middot; A/D rudder &middot; C camera &middot; M mute &middot; R restart</div>
+</div>
+
+<!-- Title / sortie select -->
+<div id="menu" class="overlay">
+  <div class="panel">
+    <h1>KAIMANA AIR MAIL</h1>
+    <p class="subtitle">Golden Hour Mail Run &middot; Kaimana Archipelago</p>
+    <p class="brief">Fly the sunset mail run. Thread every gold mail ring, mind the trade wind,
+      and bring her home onto the strip at Palau Kaimana before the fuel gauge kisses empty.
+      Gentle touchdown, full mail sack, big bonus.</p>
+    <div id="sortie-list">
+      <button class="sortie" data-sortie="dawn">1 &middot; DAWN MAIL RUN <span>8 rings &middot; light wind &middot; 6:00</span></button>
+      <button class="sortie" data-sortie="reef">2 &middot; REEF RESCUE <span>10 rings &middot; gusty wind &middot; 7:00 &middot; clinic strip</span></button>
+      <button class="sortie" data-sortie="sunset">3 &middot; SUNSET EXPRESS <span>12 rings &middot; strong wind &middot; 5:00 &middot; double score</span></button>
+    </div>
+    <p class="controls">W/S throttle &middot; UP/DOWN pitch &middot; LEFT/RIGHT bank &middot; A/D rudder &middot;
+      C chase / cockpit &middot; mouse drag looks around &middot; M mute</p>
+    <p class="tiny">A tiny mail plane, three islands, one golden hour. All art and sound made for this game.</p>
+  </div>
+</div>
+
+<!-- End of sortie -->
+<div id="endscreen" class="overlay hidden">
+  <div class="panel">
+    <h1 id="end-title">MAIL DELIVERED</h1>
+    <p id="end-line" class="subtitle"></p>
+    <div id="end-breakdown"></div>
+    <button id="restart-button">FLY AGAIN</button>
+    <button id="menu-button" class="ghost">CHANGE SORTIE</button>
+  </div>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
